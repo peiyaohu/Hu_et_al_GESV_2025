@@ -3,7 +3,7 @@ VSEARCH=~/biosoft/vsearch-2.30.0/bin/vsearch
 
     # Step1: Quality control
     echo "Quality filtering for $SampleID"
-    $VSEARCH --fastq_filter ../rawseq/hdr.fastq \
+    $VSEARCH --fastq_filter ./rawseq/hdr.fastq \
              --fastq_maxee 1 \
              --fastq_maxns 0 \
              --fastaout "hdr.filtered.fasta" \
