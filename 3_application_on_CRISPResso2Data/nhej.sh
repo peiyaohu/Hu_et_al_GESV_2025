@@ -3,7 +3,7 @@ VSEARCH=~/biosoft/vsearch-2.30.0/bin/vsearch
 
     # Step0: Merge PE reads
     $VSEARCH --fastq_mergepairs ../rawseq/nhej.r1.fastq\
-             --reverse ../rawseq/nhej.r2.fastq \
+             --reverse ./rawseq/nhej.r2.fastq \
              --fastq_minovlen 10 \
              --fastq_maxdiffs 15 \
              --fastqout "nhej.merged.fastq" \
