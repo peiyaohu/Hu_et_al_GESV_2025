@@ -43,4 +43,86 @@ The project is organized into the following main directories, each representing 
 | cutadapt                | v1.9.1    | Primer removal  (Necessary for GESV pipeline)                |
 | Biostrings, R package   | v2.62.0   | SVs alignment with reference sequence in GESV pipeline  (Necessary for GESV pipeline) |
 
+# GESV Online Tool: NGS Data Analysis Procedure
 
+## Overview
+
+GESV (Genotyping Edited Sequence Variants) is an integrated online tool for analyzing next-generation sequencing (NGS) data from gene editing experiments. This document provides a step-by-step procedure for using the GESV online platform.
+
+## Input Requirements
+
+### 1. Sample Metadata File
+
+A tab-delimited file containing the following required columns:
+
+| Column                             | Description                                           | Note      |
+| ---------------------------------- | ----------------------------------------------------- | --------- |
+| **SampleID**                       | Unique identifier for each sequencing file            | Mandatory |
+| **MSU locus**                      | Target site identifier (e.g., gene locus)             | Mandatory |
+| **WT (5'-3', without primer seq)** | Reference wild-type sequence without primer sequences | Mandatory |
+| **Guide_PAM_5prime**               | Guide RNA and PAM sequence (5' end)                   | Mandatory |
+| **R1_primer_seq**                  | Forward PCR primer sequence (5'→3')                   | Mandatory |
+| **R2_primer_seq**                  | Reverse PCR primer sequence (5'→3')                   | Mandatory |
+| **Details**                        | Optional sample information and notes                 | Optimal   |
+
+**Example Metadata:**
+
+| SampleID              | MSU locus      | WT (5'-3')                                                   | Guide_PAM_5prime        | R1_primer_seq             | R2_primer_seq          | Details                |
+| --------------------- | -------------- | ------------------------------------------------------------ | ----------------------- | ------------------------- | ---------------------- | ---------------------- |
+| SY16011-USR-32598-002 | LOC_Os08g10320 | GTGTTGTCTGAACCATCCTTCGTTCTTTTGTGTAAAAAAAATAGGCATGTGGGGATTCAATGCACTCTCAGGACCAATTCCGA | GTGGGATTCAATGCACTCTCAGG | GTTCTTGCAGTAATAATCAGTTGAT | AAGTTGAGGTTCGTGAGATTCC | RM009-10;R103;LRR-VIII |
+
+### 2. Raw Sequencing Files
+
+- **Format**: FASTQ files (quality encoding: Sanger/Illumina 1.8+)
+- **Read Types**:
+  - **Paired-end reads**: GESV will automatically merge forward and reverse reads
+  - **Single-end reads**: Merging step will be skipped
+- **Compression**: GZIP compression supported (.fastq.gz)
+
+## Output Files
+
+After processing, users will receive two main output files:
+
+### 1. `File1.fa` - Sequence Variants per Sample
+
+- **Format**: FASTA format
+- **Content**: All detected sequence variants (SVs) with abundance information
+- **Naming convention**: `SV{ID};size={abundance_count}`
+- **Usage**: Suitable for local multiple sequence alignment and further analysis
+
+**Example:**
+
+```fasta
+>SV1;size=1500
+GTGTTGTCTGAACCATCCTTCGTTCTTTTGTGTAAAAAAAATAGGCATGTGGGGATTCAATGCACTCTCAGGACCAATTCCGA
+>SV2;size=850
+GTGTTGTCTGAACCATCCTTCGTTCTTTTGTGTAAAAAAAATAGGCATGTGGGGATTCAATGCACTCTCAGGACCAATTCCGAT
+```
+
+### 2. `File2.csv` - Pairwise Alignment Results
+
+- **Format**: CSV (Comma-separated values)
+- **Content**: BLASTN-style alignment results comparing SVs against wild-type sequence
+- **Columns include**:
+  - Sample ID
+  - SV identifier
+  - Edit type classification(Substitutions (S), Insertions (I), Deletions (D))
+  - Mutation details (1D, 2I, 3S)
+
+## Step-by-Step Workflow
+
+1. **Prepare Input Files**
+   - Format sample metadata according to the template
+2. **Upload to GESV Platform**
+   - Access GESV through CRISPR-P website
+   - Upload metadata file and sequencing files
+   - Select appropriate analysis parameters
+3. **Automated Processing**
+   - Quality control and adapter trimming
+   - Read merging (for paired-end data)
+   - Sequence variant calling and genotyping
+   - Alignment and edit type classification
+4. **Download Results**
+   - Retrieve `File1.fa` for variant sequences
+   - Download `File2.csv` for detailed alignment results
+   - Use outputs for downstream analysis and visualization
