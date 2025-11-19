@@ -43,13 +43,13 @@ The project is organized into the following main directories, each representing 
 | cutadapt                | v1.9.1    | Primer removal  (Necessary for GESV pipeline)                |
 | Biostrings, R package   | v2.62.0   | SVs alignment with reference sequence in GESV pipeline  (Necessary for GESV pipeline) |
 
-# GESV Online Tool: NGS Data Analysis Procedure
+## GESV Online Tool: NGS Data Analysis Procedure
 
-## Overview
+### Overview
 
 GESV (Genotyping Edited Sequence Variants) is an integrated online tool for analyzing next-generation sequencing (NGS) data from gene editing experiments. This document provides a step-by-step procedure for using the GESV online platform.
 
-## Input Requirements
+### Input Requirements
 
 ### 1. Sample Metadata File
 
@@ -79,7 +79,7 @@ A tab-delimited file containing the following required columns:
   - **Single-end reads**: Merging step will be skipped
 - **Compression**: GZIP compression supported (.fastq.gz)
 
-## Output Files
+### Output Files
 
 After processing, users will receive two main output files:
 
@@ -109,7 +109,7 @@ GTGTTGTCTGAACCATCCTTCGTTCTTTTGTGTAAAAAAAATAGGCATGTGGGGATTCAATGCACTCTCAGGACCAATTC
   - Edit type classification(Substitutions (S), Insertions (I), Deletions (D))
   - Mutation details (1D, 2I, 3S)
 
-## Step-by-Step Workflow
+### Step-by-Step Workflow
 
 1. **Prepare Input Files**
    - Format sample metadata according to the template
