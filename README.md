@@ -6,6 +6,9 @@ This repository contains the complete source code, demo data, and analysis scrip
 
 The project is organized into the following main directories, each representing a key component of our study:
 
+For more information, please visit the GESV website: http://crispr.hzau.edu.cn/gesv (Note: Please use HTTP. Some browsers may default to HTTPS, which is currently not supported.)
+
+
 ------
 
 ### **Directory Structure and Description**
