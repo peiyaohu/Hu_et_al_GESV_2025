@@ -112,6 +112,12 @@ GTGTTGTCTGAACCATCCTTCGTTCTTTTGTGTAAAAAAAATAGGCATGTGGGGATTCAATGCACTCTCAGGACCAATTC
   - Edit type classification(Substitutions (S), Insertions (I), Deletions (D))
   - Mutation details (1D, 2I, 3S)
 
+Note:
+SVs with abundances between 8 and 50 are flagged for careful interpretation, as they may represent either true low-frequency biological edits or systematic technical artifacts. For these flagged sequences, we recommend a two-step validation:
+(1) Negative Control Cross-Reference: Users should check whether the identical low-abundance SV appears in the untreated or negative control sample. If the same variant is present in the control group with a similar low read count, it can be confidently discarded as systematic PCR background or a baseline genomic SNP rather than a true editing outcome.
+(2) Indel Characteristics: e.g. True CRISPR/Cas9 variants typically manifest as insertions or deletions (indels) tightly clustered around the predicted double-strand break (DSB) site (typically 3–4 bp upstream of the PAM sequence). If a flagged SV within the 8–50 range consists primarily of random single-nucleotide substitutions far from the cleavage site, it is highly likely a sequencing/PCR artifact and should be excluded from the final editing rate calculation.
+
+
 ### Step-by-Step Workflow
 
 1. **Prepare Input Files**
